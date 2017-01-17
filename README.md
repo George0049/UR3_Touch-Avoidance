@@ -9,6 +9,7 @@ Because I don't have the force-sensor model in UR3, I think I could use the rand
 My project performs that the end of UR3 receives the radom quality,so that it will change it's position, 
 and then, it will come back to the origin immediately.
 
+Video web page: http://youtu.be/YHOWtU2oe94
 
 #UR3 机器人触碰躲避项目
 
