@@ -17,14 +17,20 @@
 
 geometry_msgs::Pose target_pose1;
 
+int ix,iy,iz;
+
 void poseMessageReceived ( const geometry_msgs::Pose& msg ) 
 {
 	moveit::planning_interface::MoveGroup group("manipulator");
 	moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
 
-	std::cout<<"positon_x="<<msg.position.x<<" position_y="<<msg.position.y<<std::endl;
+	std::cout<<"positon_x="<<msg.position.x<<" position_y="<<msg.position.y<<" position_z="<<msg.position.z<<std::endl;
 
 //------------------------------------------------
+	ix=1-rand()%3;
+	iy=1-rand()%3;
+	iz=1-rand()%3;
+
 	target_pose1.position.x = 0.314288;
 	target_pose1.position.y = 0.153859;
 	target_pose1.position.z = 0.226919;
@@ -35,12 +41,13 @@ void poseMessageReceived ( const geometry_msgs::Pose& msg )
 
 	group.setPoseTarget(target_pose1);
 	bool success0 = group.move();
-	sleep(1.0);
+	sleep(0.5);
 //------------------------------------------------
 
 
-	target_pose1.position.x = 0.314288 + msg.position.x/10;
-	target_pose1.position.y = 0.153859 + msg.position.y/10;
+	target_pose1.position.x = 0.314288 +ix*msg.position.x/10;
+	target_pose1.position.y = 0.153859 +iy*msg.position.y/10;
+	target_pose1.position.z = 0.226919 +iz*msg.position.z/10;
 	group.setPoseTarget(target_pose1);
 	bool success = group.move();
 	ROS_INFO("Visuallizing plan 1 (pose goal) %s", success?"":"FAILED");
@@ -70,7 +77,7 @@ int main(int argc, char **argv)
 //-------------------------------------------------------------------------------
 	//target_pose1.position.x += fixed;
 
-
+/*
 	target_pose1.position.x = 0.314288;
 	target_pose1.position.y = 0.153859;
 	target_pose1.position.z = 0.226919;
@@ -82,12 +89,12 @@ int main(int argc, char **argv)
 	group.setPoseTarget(target_pose1);
 	bool success = group.move();
 	ROS_INFO("Visuallizing plan 1 (pose goal) %s", success?"":"FAILED");
-	
+*/	
 
 
 	sleep(1.0);
 	
 	ros::spin();
 	// ros::shutdown();
-	// return 0;
+	return 0;
 }

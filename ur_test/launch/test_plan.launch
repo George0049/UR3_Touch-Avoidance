@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+	<node name="test_home_node" pkg="ur_test" type="test_home_node" respawn="false" output="screen" >
+		<rosparam command="load" file="$(find ur3_moveit_config)/config/kinematics.yaml"/>
+		<param  name="/planning_plugin" value="ompl_interface/OMPLPlanner"/>
+		<rosparam command="load" file="$(find ur3_moveit_config)/config/ompl_planning.yaml"/>
+	</node>
+</launch>

@@ -1,0 +1,28 @@
+#include <ros/ros.h>
+#include <geometry_msgs/Pose.h>
+#include <iostream>
+
+int main(int argc, char** argv)
+{
+		std::cout<<"is ok"<<std::endl;
+		if(!fork())
+		{
+			std::cout<<"child"<<std::endl;
+			ros::init(argc, argv, "talker");
+			ros::NodeHandle nh;
+			ros::Publisher pub = nh.advertise<geometry_msgs::Pose>("ur/tcp", 100);
+			geometry_msgs::Pose msg;
+			ros::Rate rate(1);
+			pub.publish(msg);
+			while(ros::ok())
+			{
+				msg.orientation.x = msg.orientation.y = 100;
+				pub.publish(msg);
+				rate.sleep();
+
+			}
+			exit(0);
+		}
+	exit(0);
+	return 0;
+}

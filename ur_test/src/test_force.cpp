@@ -33,13 +33,13 @@ int main ( int argc , char ** argv )
     ros::NodeHandle nh ;
 
     // Create a publisher obj ect .
-    ros::Publisher pub = nh.advertise<geometry_msgs::Pose>("ur3_force" , 1000 ) ;
+    ros::Publisher pub = nh.advertise<geometry_msgs::Pose>("ur3_force" , 10000 ) ;
 
     // Seed the random number generator .
     srand (time(0)) ;
 
     // Loop at 2Hz until the node is shut down.
-    ros::Rate rate (2) ;
+    ros::Rate rate (1) ;
     while (ros::ok ()) 
     {
         // Create and fill in the message . The other four
@@ -56,12 +56,13 @@ int main ( int argc , char ** argv )
 
         msg.position.x = double(rand())/double(RAND_MAX) ;
         msg.position.y = double(rand())/double(RAND_MAX) ;
-        
+        msg.position.z = double(rand())/double(RAND_MAX) ;
+
         // Publish the message .
         pub.publish(msg) ;
 
         // Send a message to rosout with the details .
-        ROS_INFO_STREAM("Sending random force command : "<<" position_x="<<msg.position.x<<" position_y="<<msg.position.y) ;
+        ROS_INFO_STREAM("Sending random force command : "<<" position_x="<<msg.position.x<<" position_y="<<msg.position.y<<" position_z="<<msg.position.z);
 
         // Wait untilit's time for another iteration .
         rate.sleep ( ) ;
