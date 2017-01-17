@@ -10,6 +10,7 @@ My project performs that the end of UR3 receives the radom quality,so that it wi
 and then, it will come back to the origin immediately.
 
 Video web page: https://youtu.be/YH0WtU2oe94
+And my teammate finish a impedance control in pr2, the video web page: https://youtu.be/kRWRyaUIlDc
 
 #UR3 机器人触碰躲避项目
 
